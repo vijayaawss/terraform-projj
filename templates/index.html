@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>WanderShare — Share Your Journey</title>
+
+<style>
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+
+    background:
+        linear-gradient(
+            rgba(31, 42, 95, 0.65),
+            rgba(92, 48, 120, 0.75)
+        ),
+        url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=2000&q=80");
+
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+
+    color: white;
+}
+
+
+/* NAVBAR */
+
+nav {
+
+    height: 72px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 8%;
+
+    background:
+        linear-gradient(
+            90deg,
+            #4f6df5,
+            #7652c8,
+            #9b4dcc
+        );
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,0.2);
+}
+
+.logo {
+
+    font-size: 25px;
+
+    font-weight: bold;
+}
+
+.view-link {
+
+    color: white;
+
+    text-decoration: none;
+
+    padding: 10px 18px;
+
+    border-radius: 8px;
+
+    background:
+        rgba(255,255,255,0.16);
+
+    font-weight: bold;
+
+    transition: 0.3s;
+}
+
+.view-link:hover {
+
+    background:
+        rgba(255,255,255,0.28);
+}
+
+
+/* HERO */
+
+.hero {
+
+    text-align: center;
+
+    padding: 85px 20px 50px;
+}
+
+.hero h1 {
+
+    font-size: 54px;
+
+    margin-bottom: 18px;
+}
+
+.hero p {
+
+    max-width: 720px;
+
+    margin: auto;
+
+    font-size: 20px;
+
+    line-height: 1.6;
+}
+
+
+/* FORM */
+
+.form-container {
+
+    width: 90%;
+
+    max-width: 700px;
+
+    margin: 25px auto 70px;
+
+    padding: 35px;
+
+    background:
+        rgba(255,255,255,0.96);
+
+    color: #222;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 15px 40px rgba(0,0,0,0.3);
+}
+
+.form-container h2 {
+
+    text-align: center;
+
+    font-size: 30px;
+
+    margin-bottom: 10px;
+}
+
+.subtitle {
+
+    text-align: center;
+
+    color: #777;
+
+    margin-bottom: 25px;
+}
+
+label {
+
+    display: block;
+
+    font-weight: bold;
+
+    margin-top: 18px;
+
+    margin-bottom: 8px;
+}
+
+input,
+textarea {
+
+    width: 100%;
+
+    padding: 14px;
+
+    border: 1px solid #ccc;
+
+    border-radius: 10px;
+
+    font-size: 15px;
+}
+
+textarea {
+
+    min-height: 140px;
+
+    resize: vertical;
+}
+
+input:focus,
+textarea:focus {
+
+    outline: none;
+
+    border-color: #7652c8;
+
+    box-shadow:
+        0 0 0 3px rgba(118,82,200,0.12);
+}
+
+
+/* UPLOAD */
+
+.upload-box {
+
+    padding: 20px;
+
+    border: 2px dashed #7652c8;
+
+    border-radius: 10px;
+
+    background: #faf8ff;
+
+    text-align: center;
+}
+
+.upload-box input {
+
+    border: none;
+
+    padding: 5px;
+}
+
+
+/* PREVIEW */
+
+#preview {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fill,
+            minmax(100px, 1fr)
+        );
+
+    gap: 10px;
+
+    margin-top: 15px;
+}
+
+#preview img {
+
+    width: 100%;
+
+    height: 100px;
+
+    object-fit: cover;
+
+    border-radius: 8px;
+}
+
+
+/* SUBMIT */
+
+.submit-btn {
+
+    width: 100%;
+
+    margin-top: 25px;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #536dfe,
+            #8e44ad
+        );
+
+    color: white;
+
+    font-size: 17px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+
+    opacity: 0.9;
+
+    transform: translateY(-2px);
+}
+
+
+/* SUCCESS */
+
+.success {
+
+    display: none;
+
+    margin-top: 18px;
+
+    padding: 14px;
+
+    border-radius: 10px;
+
+    background: #d4edda;
+
+    color: #155724;
+
+    text-align: center;
+
+    font-weight: bold;
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px) {
+
+    .hero h1 {
+
+        font-size: 38px;
+    }
+
+    .form-container {
+
+        padding: 25px;
+    }
+
+    nav {
+
+        padding: 0 5%;
+    }
+
+}
+
+</style>
+
+<style>
+:root {
+    --navy: #0d2331;
+    --navy-soft: #173b4c;
+    --coral: #f06f4f;
+    --coral-dark: #d95739;
+    --cream: #fffaf5;
+    --ink: #17242c;
+    --muted: #667780;
+    --line: #dfe6e8;
+    --success: #18794e;
+    --radius-lg: 28px;
+    --radius-md: 15px;
+    --shadow: 0 28px 75px rgba(4, 20, 29, .28);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background:
+        linear-gradient(120deg, rgba(5, 23, 34, .87), rgba(10, 42, 53, .59)),
+        url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=2200&q=85") center / cover fixed;
+    color: #fff;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(180deg, rgba(3, 18, 27, .05), rgba(3, 18, 27, .26));
+    z-index: -1;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    height: 80px;
+    padding: 0 max(5vw, 24px);
+    background: rgba(8, 31, 43, .52);
+    border-bottom: 1px solid rgba(255, 255, 255, .16);
+    box-shadow: 0 10px 35px rgba(2, 15, 22, .13);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -.5px;
+}
+
+.view-link {
+    padding: 11px 19px;
+    border: 1px solid rgba(255, 255, 255, .23);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .12);
+    font-size: 14px;
+    font-weight: 700;
+    transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+}
+
+.view-link:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, .21);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .16);
+}
+
+.hero {
+    padding: clamp(72px, 10vw, 126px) 22px 42px;
+}
+
+.hero h1 {
+    max-width: 950px;
+    margin: 0 auto 20px;
+    font-size: clamp(42px, 6vw, 76px);
+    line-height: 1.04;
+    letter-spacing: -2.8px;
+    text-wrap: balance;
+}
+
+.hero p {
+    max-width: 680px;
+    color: rgba(255, 255, 255, .79);
+    font-size: clamp(17px, 2vw, 20px);
+    line-height: 1.75;
+}
+
+.form-container {
+    width: min(92%, 720px);
+    margin: 18px auto 90px;
+    padding: clamp(28px, 5vw, 48px);
+    color: var(--ink);
+    background: rgba(255, 255, 255, .96);
+    border: 1px solid rgba(255, 255, 255, .68);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.form-container h2 {
+    margin-bottom: 8px;
+    font-size: clamp(28px, 4vw, 36px);
+    letter-spacing: -1px;
+}
+
+.subtitle {
+    margin-bottom: 30px;
+    color: var(--muted);
+    font-size: 15px;
+}
+
+label {
+    margin: 20px 0 8px;
+    color: #293a43;
+    font-size: 14px;
+    font-weight: 750;
+}
+
+input,
+textarea {
+    padding: 15px 16px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: #f5f7f7;
+    color: var(--ink);
+    font: inherit;
+    transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+}
+
+input::placeholder,
+textarea::placeholder { color: #91a0a7; }
+
+input:focus,
+textarea:focus {
+    border-color: var(--coral);
+    background: #fff;
+    box-shadow: 0 0 0 4px rgba(240, 111, 79, .13);
+}
+
+textarea { min-height: 150px; line-height: 1.6; }
+
+.upload-box {
+    position: relative;
+    padding: 28px 20px;
+    border: 2px dashed #e8a28f;
+    border-radius: 18px;
+    background: #fff8f5;
+    transition: border-color .2s ease, background .2s ease, transform .2s ease;
+}
+
+.upload-box:hover {
+    border-color: var(--coral);
+    background: #fff4ef;
+    transform: translateY(-1px);
+}
+
+.upload-icon {
+    display: grid;
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 12px;
+    place-items: center;
+    border-radius: 14px;
+    background: #ffe3da;
+    font-size: 23px;
+}
+
+.upload-title { display: block; margin-bottom: 4px; color: #34464f; font-weight: 750; }
+.upload-help { color: var(--muted); font-size: 13px; }
+
+.upload-box input {
+    margin-top: 14px;
+    padding: 8px;
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+}
+
+.upload-box input::file-selector-button {
+    margin-right: 12px;
+    padding: 9px 14px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--coral);
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#preview { gap: 12px; margin-top: 16px; }
+
+#preview img {
+    height: 110px;
+    border-radius: 13px;
+    box-shadow: 0 7px 18px rgba(10, 34, 45, .15);
+}
+
+.submit-btn {
+    margin-top: 28px;
+    padding: 16px 22px;
+    border-radius: 15px;
+    background: var(--coral);
+    box-shadow: 0 13px 28px rgba(217, 87, 57, .28);
+    font-family: inherit;
+    font-size: 16px;
+    transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+}
+
+.submit-btn:hover {
+    opacity: 1;
+    transform: translateY(-3px);
+    background: var(--coral-dark);
+    box-shadow: 0 17px 34px rgba(217, 87, 57, .33);
+}
+
+.submit-btn:active { transform: translateY(-1px); }
+.submit-btn:disabled { cursor: wait; opacity: .72; transform: none; }
+
+.success {
+    margin-top: 18px;
+    padding: 14px 16px;
+    border: 1px solid #b7e3ce;
+    border-radius: 13px;
+    background: #eaf8f0;
+    color: var(--success);
+    font-size: 14px;
+}
+
+@media (max-width: 600px) {
+    nav { height: 70px; padding: 0 18px; }
+    .logo { font-size: 18px; }
+    .view-link { padding: 9px 13px; font-size: 12px; }
+    .hero { padding: 62px 18px 34px; }
+    .hero h1 { font-size: 42px; letter-spacing: -1.8px; }
+    .hero p { font-size: 16px; }
+    .form-container { width: calc(100% - 28px); margin-bottom: 48px; padding: 25px 20px; border-radius: 22px; }
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav>
+
+    <div class="logo">
+
+        🌍 WanderShare
+
+    </div>
+
+
+    <a
+        href="/visits"
+        class="view-link">
+
+        🌎 View Places
+
+    </a>
+
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero">
+
+    <h1>
+
+        Welcome to WanderShare 🌎
+
+    </h1>
+
+
+    <p>
+
+        Discover beautiful places through real experiences
+        shared by people. Share a place you visited and
+        inspire someone else's next journey.
+
+    </p>
+
+</section>
+
+
+<!-- FORM -->
+
+<div class="form-container">
+
+    <h2>
+
+        Share Your Place
+
+    </h2>
+
+
+    <p class="subtitle">
+
+        Tell us about a place you visited
+
+    </p>
+
+
+    <form id="placeForm">
+
+
+        <!-- NAME -->
+
+        <label>
+
+            Your Name
+
+        </label>
+
+
+        <input
+
+            type="text"
+
+            id="name"
+
+            name="name"
+
+            placeholder="Enter your name"
+
+            required
+
+        >
+
+
+        <!-- LOCATION -->
+
+        <label>
+
+            Location
+
+        </label>
+
+
+        <input
+
+            type="text"
+
+            id="location"
+
+            name="location"
+
+            placeholder="e.g. Goa, Manali, Jaipur..."
+
+            required
+
+        >
+
+
+        <!-- EXPERIENCE -->
+
+        <label>
+
+            Experience About The Place
+
+        </label>
+
+
+        <textarea
+
+            id="experience"
+
+            name="experience"
+
+            placeholder="Tell us about your experience, things to do, what you liked..."
+
+            required
+
+        ></textarea>
+
+
+        <!-- PHOTOS -->
+
+        <label>
+
+            Upload Photos About The Place
+
+        </label>
+
+
+        <div class="upload-box">
+
+            <div class="upload-icon" aria-hidden="true">↥</div>
+
+            <span class="upload-title">Add photos from your journey</span>
+
+            <span class="upload-help">Choose one or multiple images to preview</span>
+
+            <input
+
+                type="file"
+
+                id="photos"
+
+                name="photos"
+
+                accept="image/*"
+
+                multiple
+
+            >
+
+        </div>
+
+
+        <!-- IMAGE PREVIEW -->
+
+        <div id="preview"></div>
+
+
+        <!-- SUBMIT -->
+
+        <button
+
+            type="submit"
+
+            class="submit-btn">
+
+            ✨ Submit Place
+
+        </button>
+
+
+        <!-- SUCCESS -->
+
+        <div
+
+            class="success"
+
+            id="successMessage">
+
+            ✅ Place submitted successfully!
+
+        </div>
+
+
+    </form>
+
+</div>
+
+
+<script type="text/plain" id="legacy-local-storage-script">
+
+
+/* =========================================
+   IMAGE PREVIEW
+========================================= */
+
+document
+.getElementById("photos")
+.addEventListener(
+    "change",
+    function () {
+
+        const preview =
+            document.getElementById(
+                "preview"
+            );
+
+
+        preview.innerHTML = "";
+
+
+        for (
+            const file of this.files
+        ) {
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function (event) {
+
+                    const img =
+                        document.createElement(
+                            "img"
+                        );
+
+
+                    img.src =
+                        event.target.result;
+
+
+                    preview.appendChild(
+                        img
+                    );
+
+                };
+
+
+            reader.readAsDataURL(
+                file
+            );
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   FORM SUBMIT
+   TEMPORARY LOCAL STORAGE
+========================================= */
+
+document
+.getElementById("placeForm")
+.addEventListener(
+    "submit",
+    async function (event) {
+
+        event.preventDefault();
+
+
+        const name =
+            document
+            .getElementById("name")
+            .value
+            .trim();
+
+
+        const location =
+            document
+            .getElementById("location")
+            .value
+            .trim();
+
+
+        const experience =
+            document
+            .getElementById("experience")
+            .value
+            .trim();
+
+
+        const files =
+            document
+            .getElementById("photos")
+            .files;
+
+
+        let images = [];
+
+
+        /* Convert selected images */
+
+        for (
+            const file of files
+        ) {
+
+            const image =
+                await convertToBase64(
+                    file
+                );
+
+
+            images.push(
+                image
+            );
+
+        }
+
+
+        /* Create place object */
+
+        const place = {
+
+            id: Date.now(),
+
+            name: name,
+
+            location: location,
+
+            experience: experience,
+
+            images: images
+
+        };
+
+
+        /* Get old places */
+
+        let places =
+            JSON.parse(
+                localStorage.getItem(
+                    "places"
+                )
+            ) || [];
+
+
+        /* Add new place */
+
+        places.push(
+            place
+        );
+
+
+        /* Save */
+
+        localStorage.setItem(
+
+            "places",
+
+            JSON.stringify(
+                places
+            )
+
+        );
+
+
+        /* Success message */
+
+        document
+        .getElementById(
+            "successMessage"
+        )
+        .style.display =
+            "block";
+
+
+        /* Reset form */
+
+        document
+        .getElementById(
+            "placeForm"
+        )
+        .reset();
+
+
+        /* Remove preview */
+
+        document
+        .getElementById(
+            "preview"
+        )
+        .innerHTML = "";
+
+
+        /* Hide success */
+
+        setTimeout(
+            function () {
+
+                document
+                .getElementById(
+                    "successMessage"
+                )
+                .style.display =
+                    "none";
+
+            },
+            3000
+        );
+
+    }
+);
+
+
+/* =========================================
+   IMAGE TO BASE64
+========================================= */
+
+function convertToBase64(
+    file
+) {
+
+    return new Promise(
+        function (
+            resolve,
+            reject
+        ) {
+
+            const reader =
+                new FileReader();
+
+
+            reader.onload =
+                function () {
+
+                    resolve(
+                        reader.result
+                    );
+
+                };
+
+
+            reader.onerror =
+                function (error) {
+
+                    reject(
+                        error
+                    );
+
+                };
+
+
+            reader.readAsDataURL(
+                file
+            );
+
+        }
+    );
+
+}
+
+</script>
+
+<script>
+const form = document.getElementById("placeForm");
+const photoInput = document.getElementById("photos");
+const preview = document.getElementById("preview");
+const successMessage = document.getElementById("successMessage");
+const submitButton = form.querySelector('[type="submit"]');
+
+photoInput.addEventListener("change", function () {
+    preview.innerHTML = "";
+    for (const file of this.files) {
+        const reader = new FileReader();
+        reader.onload = function (event) {
+            const img = document.createElement("img");
+            img.src = event.target.result;
+            img.alt = "Selected travel photo preview";
+            preview.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+    }
+});
+
+form.addEventListener("submit", async function (event) {
+    event.preventDefault();
+    successMessage.style.display = "none";
+    submitButton.disabled = true;
+    submitButton.textContent = "Uploading & saving…";
+
+    try {
+        const response = await fetch("/api/places", {
+            method: "POST",
+            body: new FormData(form)
+        });
+        const responseText = await response.text();
+        let result = {};
+        try {
+            result = responseText ? JSON.parse(responseText) : {};
+        } catch (_error) {
+            if (!response.ok) {
+                throw new Error(`Server error (${response.status}). Check the Flask terminal.`);
+            }
+            throw new Error("The server returned an invalid response.");
+        }
+        if (!response.ok) throw new Error(result.error || "Submission failed.");
+
+        successMessage.textContent = "✅ Place submitted successfully!";
+        successMessage.style.background = "#eaf8f0";
+        successMessage.style.borderColor = "#b7e3ce";
+        successMessage.style.color = "#18794e";
+        successMessage.style.display = "block";
+        form.reset();
+        preview.innerHTML = "";
+        setTimeout(() => { successMessage.style.display = "none"; }, 3000);
+    } catch (error) {
+        successMessage.textContent = `⚠️ ${error.message}`;
+        successMessage.style.display = "block";
+        successMessage.style.background = "#fff1ef";
+        successMessage.style.borderColor = "#f3c2b7";
+        successMessage.style.color = "#a83d27";
+    } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "✨ Submit Place";
+    }
+});
+</script>
+
+
+</body>
+
+</html>
