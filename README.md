@@ -1,3 +1,9 @@
+
+# Terraform AWS Highly Available Web Application
+
+### 🚀 3-Tier Highly Available AWS Architecture
+**Infrastructure as Code using Terraform**
+
 ## 📌 Overview
 
 This project provisions a **highly available AWS web application infrastructure using Terraform (Infrastructure as Code)**.
@@ -10,7 +16,7 @@ Terraform is used to provision and manage AWS resources consistently and repeate
 
 ## 🏗️ Architecture
 
-![AWS Terraform Architecture](docs/architecture.png)
+![AWS Terraform Architecture](docs/terrafrom_arch.jpg)
 
 ### Architecture Flow
 
