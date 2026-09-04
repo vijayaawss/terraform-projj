@@ -290,4 +290,3 @@ crash.log
 **Vijaya**
 
 ---
-```
