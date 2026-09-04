@@ -16,7 +16,7 @@ Terraform is used to provision and manage AWS resources consistently and repeate
 
 ## 🏗️ Architecture
 
-![AWS Terraform Architecture](docs/terrafrom_arch.jpg)
+![AWS Terraform Architecture](imgs/terrafrom_arch.jpg)
 
 ### Architecture Flow
 
