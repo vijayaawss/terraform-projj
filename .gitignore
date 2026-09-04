@@ -1,6 +1,15 @@
+<<<<<<< HEAD
 .terraform/
 terraform.tfstate
 terraform.tfstate.*
 terraform.tfvars
 *.tfstate
 *.tfstate.backup
+=======
+.env
+.venv/
+__pycache__/
+*.py[cod]
+instance/
+migrations/__pycache__/
+>>>>>>> bbd9d7ecb6cab603711bdbbe0c68a5daabe4bdc3

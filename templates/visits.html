@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>WanderShare — Community Places</title>
+
+
+<style>
+
+* {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+    font-family: Arial, sans-serif;
+
+}
+
+
+body {
+
+    min-height: 100vh;
+
+    background:
+
+        linear-gradient(
+
+            rgba(31,42,95,0.70),
+
+            rgba(92,48,120,0.78)
+
+        ),
+
+        url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2000&q=80");
+
+
+    background-size: cover;
+
+    background-position: center;
+
+    background-attachment: fixed;
+
+    color: white;
+
+}
+
+
+/* NAVBAR */
+
+nav {
+
+    height: 72px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 8%;
+
+    background:
+
+        linear-gradient(
+
+            90deg,
+
+            #4f6df5,
+
+            #7652c8,
+
+            #9b4dcc
+
+        );
+
+    box-shadow:
+
+        0 4px 15px rgba(0,0,0,0.2);
+
+}
+
+
+.logo {
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+}
+
+
+.back-link {
+
+    color: white;
+
+    text-decoration: none;
+
+    padding: 10px 18px;
+
+    border-radius: 8px;
+
+    background:
+
+        rgba(255,255,255,0.16);
+
+    font-weight: bold;
+
+}
+
+
+.back-link:hover {
+
+    background:
+
+        rgba(255,255,255,0.28);
+
+}
+
+
+/* HEADER */
+
+.header {
+
+    text-align: center;
+
+    padding: 70px 20px 40px;
+
+}
+
+
+.header h1 {
+
+    font-size: 48px;
+
+    margin-bottom: 12px;
+
+}
+
+
+.header p {
+
+    font-size: 18px;
+
+}
+
+
+/* GRID */
+
+.places-container {
+
+    width: 90%;
+
+    max-width: 1100px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns:
+
+        repeat(
+
+            auto-fit,
+
+            minmax(320px, 1fr)
+
+        );
+
+    gap: 28px;
+
+    padding-bottom: 70px;
+
+}
+
+
+/* CARD */
+
+.place-card {
+
+    background:
+
+        rgba(255,255,255,0.97);
+
+    color: #222;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    box-shadow:
+
+        0 15px 35px rgba(0,0,0,0.3);
+
+    transition: 0.3s;
+
+}
+
+
+.place-card:hover {
+
+    transform: translateY(-6px);
+
+}
+
+
+/* PHOTO GALLERY */
+
+.photo-gallery {
+
+    display: grid;
+
+    grid-template-columns:
+
+        repeat(2, 1fr);
+
+    gap: 3px;
+
+    background: #ddd;
+
+}
+
+
+.photo-gallery img {
+
+    width: 100%;
+
+    height: 170px;
+
+    object-fit: cover;
+
+    display: block;
+
+}
+
+
+.photo-gallery.single {
+
+    grid-template-columns: 1fr;
+
+}
+
+
+.photo-gallery.single img {
+
+    height: 260px;
+
+}
+
+
+/* NO IMAGE */
+
+.no-image {
+
+    height: 260px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 60px;
+
+    background:
+
+        linear-gradient(
+
+            135deg,
+
+            #667eea,
+
+            #764ba2
+
+        );
+
+}
+
+
+/* CARD CONTENT */
+
+.card-content {
+
+    padding: 22px;
+
+}
+
+
+.place-title {
+
+    font-size: 25px;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+
+}
+
+
+.location {
+
+    color: #6654d9;
+
+    font-weight: bold;
+
+    margin-bottom: 15px;
+
+}
+
+
+.experience {
+
+    color: #555;
+
+    line-height: 1.6;
+
+}
+
+
+.author {
+
+    border-top:
+
+        1px solid #ddd;
+
+    margin-top: 18px;
+
+    padding-top: 14px;
+
+    color: #777;
+
+    font-size: 14px;
+
+}
+
+
+/* EMPTY */
+
+.empty {
+
+    background:
+
+        rgba(255,255,255,0.96);
+
+    color: #333;
+
+    padding: 50px;
+
+    border-radius: 18px;
+
+    text-align: center;
+
+    grid-column: 1 / -1;
+
+}
+
+
+.empty a {
+
+    display: inline-block;
+
+    margin-top: 20px;
+
+    padding: 13px 25px;
+
+    background: #6654d9;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 8px;
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:600px) {
+
+    .header h1 {
+
+        font-size: 36px;
+
+    }
+
+
+    nav {
+
+        padding: 0 5%;
+
+    }
+
+}
+
+</style>
+
+<style>
+:root {
+    --navy: #0d2331;
+    --coral: #f06f4f;
+    --coral-dark: #cf5236;
+    --ink: #17242c;
+    --muted: #687980;
+    --line: #e6ebed;
+    --radius-lg: 24px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background:
+        linear-gradient(120deg, rgba(5, 23, 34, .88), rgba(10, 42, 53, .63)),
+        url("https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=2200&q=85") center / cover fixed;
+    color: #fff;
+}
+
+nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    height: 80px;
+    padding: 0 max(5vw, 24px);
+    background: rgba(8, 31, 43, .52);
+    border-bottom: 1px solid rgba(255, 255, 255, .16);
+    box-shadow: 0 10px 35px rgba(2, 15, 22, .13);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: -.5px;
+}
+
+.back-link {
+    padding: 11px 19px;
+    border: 1px solid rgba(255, 255, 255, .23);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, .12);
+    font-size: 14px;
+    font-weight: 700;
+    transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+}
+
+.back-link:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, .21);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .16);
+}
+
+.header { padding: clamp(68px, 9vw, 108px) 20px 48px; }
+
+.header h1 {
+    margin-bottom: 14px;
+    font-size: clamp(40px, 5.4vw, 66px);
+    line-height: 1.05;
+    letter-spacing: -2.2px;
+}
+
+.header p {
+    color: rgba(255, 255, 255, .77);
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+.places-container {
+    width: min(92%, 1180px);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    gap: 28px;
+    padding-bottom: 84px;
+}
+
+.place-card {
+    border: 1px solid rgba(255, 255, 255, .66);
+    border-radius: var(--radius-lg);
+    background: rgba(255, 255, 255, .97);
+    box-shadow: 0 22px 55px rgba(4, 20, 29, .25);
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.place-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 30px 70px rgba(4, 20, 29, .34);
+}
+
+.photo-gallery { gap: 2px; overflow: hidden; background: #e7ecee; }
+
+.photo-gallery img {
+    height: 180px;
+    transition: transform .45s ease;
+}
+
+.place-card:hover .photo-gallery img { transform: scale(1.035); }
+.photo-gallery.single img { height: 280px; }
+
+.no-image {
+    height: 280px;
+    background: linear-gradient(135deg, #173b4c, #2e6371);
+    font-size: 55px;
+}
+
+.card-content { padding: 25px 25px 23px; }
+
+.place-title {
+    margin-bottom: 11px;
+    color: var(--ink);
+    font-size: 26px;
+    line-height: 1.2;
+    letter-spacing: -.65px;
+}
+
+.location {
+    display: inline-flex;
+    align-items: center;
+    margin-bottom: 18px;
+    padding: 7px 11px;
+    border-radius: 999px;
+    background: #ffe5dd;
+    color: var(--coral-dark);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .02em;
+}
+
+.experience {
+    color: #58686f;
+    font-size: 15px;
+    line-height: 1.75;
+    white-space: pre-line;
+}
+
+.author {
+    margin-top: 22px;
+    padding-top: 17px;
+    border-top: 1px solid var(--line);
+    color: #829097;
+    font-size: 13px;
+}
+
+.author strong { margin-left: 4px; color: #35474f; font-size: 14px; }
+
+.empty {
+    max-width: 620px;
+    margin: 10px auto 0;
+    padding: clamp(38px, 7vw, 64px) 28px;
+    border: 1px solid rgba(255, 255, 255, .7);
+    border-radius: 28px;
+    background: rgba(255, 255, 255, .96);
+    box-shadow: 0 25px 65px rgba(4, 20, 29, .27);
+}
+
+.empty-icon {
+    display: grid;
+    width: 76px;
+    height: 76px;
+    margin: 0 auto 22px;
+    place-items: center;
+    border-radius: 24px;
+    background: #ffe8e0;
+    font-size: 36px;
+}
+
+.empty h2 { color: var(--ink); font-size: 28px; letter-spacing: -.7px; }
+.empty p { color: var(--muted); line-height: 1.65; }
+
+.empty a {
+    margin-top: 24px;
+    padding: 13px 23px;
+    border-radius: 999px;
+    background: var(--coral);
+    box-shadow: 0 12px 25px rgba(217, 87, 57, .25);
+    font-weight: 750;
+    transition: transform .2s ease, background .2s ease;
+}
+
+.empty a:hover { transform: translateY(-2px); background: var(--coral-dark); }
+
+@media (max-width: 600px) {
+    nav { height: 70px; padding: 0 18px; }
+    .logo { font-size: 18px; }
+    .back-link { padding: 9px 13px; font-size: 12px; }
+    .header { padding: 60px 18px 36px; }
+    .header h1 { font-size: 40px; letter-spacing: -1.5px; }
+    .header p { font-size: 16px; }
+    .places-container { width: calc(100% - 28px); gap: 22px; }
+    .photo-gallery.single img, .no-image { height: 235px; }
+    .photo-gallery img { height: 145px; }
+    .card-content { padding: 22px 20px 20px; }
+}
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVBAR -->
+
+<nav>
+
+
+    <div class="logo">
+
+        🌍 WanderShare
+
+    </div>
+
+
+    <a
+
+        href="/"
+
+        class="back-link">
+
+        ← Back to Home
+
+    </a>
+
+
+</nav>
+
+
+<!-- HEADER -->
+
+<section class="header">
+
+    <h1>
+
+        🌎 Explore Shared Places
+
+    </h1>
+
+
+    <p>
+
+        Discover places and experiences
+        shared by our community.
+
+    </p>
+
+</section>
+
+
+<!-- PLACES -->
+
+<div
+
+    class="places-container"
+
+    id="placesContainer">
+
+</div>
+
+
+<script type="text/plain" id="legacy-local-storage-script">
+
+
+/* =========================================
+   GET SAVED PLACES
+========================================= */
+
+const container =
+    document.getElementById(
+        "placesContainer"
+    );
+
+
+let places =
+    JSON.parse(
+        localStorage.getItem(
+            "places"
+        )
+    ) || [];
+
+
+/* =========================================
+   EMPTY STATE
+========================================= */
+
+if (
+    places.length === 0
+) {
+
+    container.innerHTML = `
+
+        <div class="empty">
+
+            <div class="empty-icon" aria-hidden="true">🧭</div>
+
+            <h2>
+
+                No places shared yet 🌄
+
+            </h2>
+
+
+            <p
+                style="margin-top:10px;">
+
+                Be the first to share
+                your favorite place!
+
+            </p>
+
+
+            <a href="index.html">
+
+                Share Your Place
+
+            </a>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================
+   NEWEST FIRST
+========================================= */
+
+places.reverse();
+
+
+/* =========================================
+   CREATE CARDS
+========================================= */
+
+places.forEach(
+    function (place) {
+
+
+        let galleryHTML = "";
+
+
+        /* IMAGES */
+
+        if (
+
+            place.images &&
+
+            place.images.length > 0
+
+        ) {
+
+
+            const galleryClass =
+
+                place.images.length === 1
+
+                ? "photo-gallery single"
+
+                : "photo-gallery";
+
+
+            galleryHTML =
+
+                `<div class="${galleryClass}">`;
+
+
+            place.images.forEach(
+                function (image) {
+
+
+                    galleryHTML += `
+
+                        <img
+
+                            src="${image}"
+
+                            alt="Place photo"
+
+                        >
+
+                    `;
+
+                }
+            );
+
+
+            galleryHTML +=
+
+                "</div>";
+
+        }
+
+
+        /* NO IMAGE */
+
+        else {
+
+            galleryHTML = `
+
+                <div class="no-image">
+
+                    📍
+
+                </div>
+
+            `;
+
+        }
+
+
+        /* CARD */
+
+        const card =
+
+            document.createElement(
+                "div"
+            );
+
+
+        card.className =
+            "place-card";
+
+
+        card.innerHTML = `
+
+            ${galleryHTML}
+
+
+            <div class="card-content">
+
+
+                <div class="place-title">
+
+                    ${escapeHTML(
+                        place.location
+                    )}
+
+                </div>
+
+
+                <div class="location">
+
+                    ✦ Community destination
+
+                </div>
+
+
+                <div class="experience">
+
+                    ${escapeHTML(
+                        place.experience
+                    )}
+
+                </div>
+
+
+                <div class="author">
+
+                    Shared by
+
+                    <strong>
+
+                        ${escapeHTML(
+                            place.name
+                        )}
+
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        `;
+
+
+        container.appendChild(
+            card
+        );
+
+    }
+);
+
+
+/* =========================================
+   SECURITY
+========================================= */
+
+function escapeHTML(
+    text
+) {
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.textContent =
+        text || "";
+
+
+    return div.innerHTML;
+
+}
+
+</script>
+
+<script>
+const container = document.getElementById("placesContainer");
+
+function escapeHTML(text) {
+    const div = document.createElement("div");
+    div.textContent = text || "";
+    return div.innerHTML;
+}
+
+function emptyState() {
+    container.innerHTML = `
+        <div class="empty">
+            <div class="empty-icon" aria-hidden="true">🧭</div>
+            <h2>No places shared yet 🌄</h2>
+            <p style="margin-top:10px;">Be the first to share your favorite place!</p>
+            <a href="/">Share Your Place</a>
+        </div>`;
+}
+
+function renderPlace(place) {
+    let galleryHTML;
+    if (place.images && place.images.length) {
+        const galleryClass = place.images.length === 1
+            ? "photo-gallery single"
+            : "photo-gallery";
+        galleryHTML = `<div class="${galleryClass}">${place.images.map((image) => `
+            <img src="${escapeHTML(image)}" alt="Photo from ${escapeHTML(place.location)}" loading="lazy">
+        `).join("")}</div>`;
+    } else {
+        galleryHTML = '<div class="no-image">📍</div>';
+    }
+
+    const card = document.createElement("article");
+    card.className = "place-card";
+    card.innerHTML = `
+        ${galleryHTML}
+        <div class="card-content">
+            <div class="place-title">${escapeHTML(place.location)}</div>
+            <div class="location">✦ Community destination</div>
+            <div class="experience">${escapeHTML(place.experience)}</div>
+            <div class="author">Shared by <strong>${escapeHTML(place.name)}</strong></div>
+        </div>`;
+    container.appendChild(card);
+}
+
+async function loadPlaces() {
+    try {
+        const response = await fetch("/api/places");
+        if (!response.ok) throw new Error("Places could not be loaded.");
+        const places = await response.json();
+        if (!places.length) return emptyState();
+        places.forEach(renderPlace);
+    } catch (error) {
+        container.innerHTML = `
+            <div class="empty">
+                <div class="empty-icon" aria-hidden="true">⚠️</div>
+                <h2>We couldn't load the journeys</h2>
+                <p style="margin-top:10px;">${escapeHTML(error.message)} Please try again shortly.</p>
+                <a href="/visits">Try Again</a>
+            </div>`;
+    }
+}
+
+loadPlaces();
+</script>
+
+
+</body>
+
+</html>
