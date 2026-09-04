@@ -273,12 +273,21 @@ crash.log
 * Infrastructure as Code deployment
 
 ---
+## 🔮 Future Enhancements
+
+- Implement **Amazon CloudWatch** for application and infrastructure monitoring.
+- Add **AWS WAF** for enhanced web application security.
+- Implement **HTTPS/SSL** using AWS Certificate Manager.
+- Add **Route 53** for domain management and DNS routing.
+- Introduce **CI/CD pipeline** using AWS CodePipeline and CodeBuild.
+- Add **AWS Secrets Manager** for secure database credential management.
+- Enable automated **backup and disaster recovery** strategies.
+- Implement advanced **Auto Scaling policies** based on application traffic and resource utilization.
+- Add centralized logging and monitoring for better troubleshooting.
 
 ## 👨‍💻 Author
 
 **Vijaya**
-
-GitHub: [https://github.com/vijayaawss](https://github.com/vijayaawss)
 
 ---
 ```
